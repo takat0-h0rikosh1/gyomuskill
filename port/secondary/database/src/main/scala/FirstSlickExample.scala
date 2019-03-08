@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
  * H2 database. The example data comes from Oracle's JDBC tutorial at
  * http://docs.oracle.com/javase/tutorial/jdbc/basics/tables.html.
  */
-object FirstExample extends App {
+object FirstSlickExample extends App {
   val lines = new ArrayBuffer[Any]()
   def println(s: Any) = lines += s
 
