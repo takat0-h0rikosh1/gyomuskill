@@ -1,4 +1,4 @@
 case class User(
-    id: String,
-    name: String,
+    id: Int,
+    name: String
 )
