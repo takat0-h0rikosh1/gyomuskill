@@ -8,15 +8,7 @@ import scala.concurrent.duration.Duration
 import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.util.{ Failure, Success }
 
-import wvlet.airframe._
-
-trait SampleTraitInject {
-  val userService: UserService = bind[UserService]
-}
-
-//#main-class
-//object QuickstartServer extends App with UserRoutes {
-object QuickstartServer extends App with UserRoutes /*with SampleTraitInject*/ {
+class MyServer(userService: UserService) extends UserRoutes {
 
   // set up ActorSystem and other dependencies here
   //#main-class
@@ -49,6 +41,3 @@ object QuickstartServer extends App with UserRoutes /*with SampleTraitInject*/ {
   //#http-server
   //#main-class
 }
-
-//#main-class
-//#quick-start-server

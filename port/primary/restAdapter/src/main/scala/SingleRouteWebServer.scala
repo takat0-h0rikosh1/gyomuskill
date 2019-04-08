@@ -31,4 +31,3 @@ object SingleRouteWebServer {
       .onComplete(_ => system.terminate()) // and shutdown when done
   }
 }
-

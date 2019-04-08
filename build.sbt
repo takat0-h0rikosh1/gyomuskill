@@ -6,19 +6,27 @@ lazy val akkaHttpVersion = "10.1.7"
 lazy val akkaVersion = "2.5.20"
 
 lazy val commonSettings = Seq(
-  libraryDependencies += "io.monix" %% "monix" % "3.0.0-RC2"
+  libraryDependencies ++= Seq(
+    "io.monix" %% "monix" % "3.0.0-RC2",
+    "org.wvlet" %% "airframe" % "0.21"
+  )
 )
-lazy val root = (project in file(".")).aggregate(application, port, domain)
+lazy val root = (project in file("."))
+  .aggregate(application, port, domain)
+  .dependsOn(port % "compile->compile")
+  .settings(commonSettings)
 
 lazy val domain = project.settings(commonSettings)
 
 lazy val application = project.dependsOn(domain).settings(commonSettings)
 
-lazy val port = project.aggregate(portDatabase, portWebService)
+lazy val port = project
+  .aggregate(portDatabase, portWebService)
+  .dependsOn(portDatabase, portWebService)
 
 lazy val portDatabase = Project(
   id = "port-database",
-  base = file("port/secondary/database")
+  base = file("port/secondary/databaseAdapter")
 ).dependsOn(application).settings(
   commonSettings,
   libraryDependencies ++= Seq(
@@ -32,7 +40,7 @@ lazy val portDatabase = Project(
 
 lazy val portWebService = Project(
   id = "port-web-service",
-  base = file("port/primary/restApi")
+  base = file("port/primary/restAdapter")
 ).dependsOn(application).settings(
   commonSettings,
   libraryDependencies ++= Seq(

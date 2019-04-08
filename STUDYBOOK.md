@@ -23,3 +23,5 @@ $ curl http://127.0.0.1:8080/users -X POST \                                    
 $ curl http://127.0.0.1:8080/users
 {"users":[{"age":29,"countryOfResidence":"Japan","name":"Takato Horikoshi"}]}⏎
 ```
+
+https://twitter.com/grimrose/status/1061490815480942593 

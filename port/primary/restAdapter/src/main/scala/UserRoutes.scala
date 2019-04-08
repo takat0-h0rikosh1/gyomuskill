@@ -43,7 +43,7 @@ trait UserRoutes extends JsonSupport {
               complete(users)
             },
             post {
-              entity(as[User]) { user =>
+              entity(as[UserDTO]) { user =>
                 val userCreated: Future[ActionPerformed] =
                   (userRegistryActor ? CreateUser(user)).mapTo[ActionPerformed]
                 onSuccess(userCreated) { performed =>
@@ -59,8 +59,8 @@ trait UserRoutes extends JsonSupport {
           concat(
             get {
               //#retrieve-user-info
-              val maybeUser: Future[Option[User]] =
-                (userRegistryActor ? GetUser(name)).mapTo[Option[User]]
+              val maybeUser: Future[Option[UserDTO]] =
+                (userRegistryActor ? GetUser(name)).mapTo[Option[UserDTO]]
               rejectEmptyResponse {
                 complete(maybeUser)
               }

@@ -1,3 +1,5 @@
+import monix.eval.Task
+
 trait UserRepository {
-  def resolve: Set[User]
+  def resolveAll: Task[Seq[User]]
 }
